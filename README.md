@@ -11,20 +11,12 @@ Requirements
 - pip
 - Virtualenv (recommended)
 
-Install Dependencies:
-
-    pip install -r requirements.txt
-
 Setup Instructions
 ------------------
 
 *UNZIP THE FILE
 
-1. Create a Virtual Environment:
-
-    python -m venv env
-
-2. Install Django:
+Install Django:
    
         pip install Django    
 
