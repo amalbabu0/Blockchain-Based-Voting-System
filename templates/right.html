@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>E-voting</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body class="index-page">
+  <header id="site-header" class="header d-flex align-items-center fixed-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Vote</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <!-- <li><a href="#pricing">Pricing</a></li> -->
+          <li><a href="blog.html">Blog</a></li>
+          <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Staff Registration</a></li>
+              <li><a href="#">Student Registration</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Feedback</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <div data-aos="fade-up" data-aos-delay="300">
+        <a href="{% url 'login' %}"  class="btn btn-primary" rel="nofollow">Log In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="Hero Background Image" data-aos="fade-in" class="img-fluid">
+      <div class="container d-flex flex-column align-items-center text-center">
+        <h2>Voting Rights for College Students</h2>
+        <p data-aos="fade-up" data-aos-delay="200">As a college student, you can vote at either your campus or hometown address, depending on where you register. It's essential to understand your state's voting laws, including registration requirements and any necessary identification.</p>
+        <div data-aos="fade-up" data-aos-delay="300">
+          <!-- <a href="/opt/lampp/htdocs/vote/login/index.html" class="btn btn-lg custom-vote-btn">VOTE</a> -->
+        </div>
+        <a data-aos="fade-up" data-aos-delay="100" href="https://www.eci.gov.in/eci-backend/public/api/download?url=LMAhAK6sOPBp%2FNFF0iRfXbEB1EVSLT41NNLRjYNJJP1KivrUxbfqkDatmHy12e%2FzOS%2BIOmr%2FtOeSK8w38bI0zauoMnOBETuUsuEYi3r3dx8LdDu88DeoKfsdmTwtEqv2f9p4lm5txBxmoCtX6bnqRA%3D%3D" class="text-blue"><strong>state's voting laws</strong> </a>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Voting Rights for College Students</h2>
+      </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <ul>
+              <li><i class="bi bi-check2-circle"></i> <span><strong>Eligibility to Vote:</strong> College students can register to vote in their home state or in the state where they attend college. This flexibility allows students to participate in elections that may directly impact their local community.</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Registration Options:</strong>
+                Students can register using their college address or their permanent home address.
+                Many states allow online registration, while others may require registration by mail or in person.
+              </span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Voting Methods:</strong>
+                Students can vote in person on Election Day or during early voting periods.
+                Absentee ballots are available for those who wish to vote by mail, especially if they are registered in their home state but attending school out of state.
+              </span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Requirements:</strong>
+                Some states require photo identification to vote. Students should check their state's ID requirements and ensure they have the necessary documents.
+              </span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Special Circumstances:</strong>
+                Students experiencing homelessness can still register and vote by using a temporary address.
+                Accommodations are available for voters with disabilities, ensuring accessibility at polling places.
+              </span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Advocacy and Support:</strong>
+                If students feel their voting rights have been violated, they can reach out to organizations like the ACLU or the Election Protection coalition for assistance.
+              </span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>
+                <strong>Considerations for Voting</strong>
+                Residency Requirements: Students should be aware of how long they need to reside in a state before they can register to vote there.
+                Impact on Financial Aid: Registering to vote in a different state typically does not affect federal financial aid, but it may influence eligibility for in-state tuition.
+                Stay Informed: Students should familiarize themselves with local candidates and issues on the ballot to make informed voting decisions.  
+              </span></li>
+            </ul>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <p>By understanding these rights and responsibilities, college students can effectively participate in the democratic process and ensure their voices are heard.</p>
+            <a href="{% url 'login' %}"  class="read-more"><span>Vote</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">Vote</h3>
+      <p>Vote Smart, Vote Online - Your Campus, Your Voice!</p>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Vote</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="http://zaki.zya.me/">Zaki</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script type="text/javascript" src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

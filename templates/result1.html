@@ -1,0 +1,66 @@
+{% load static %}
+<html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+    body {
+             font-family: 'Roboto', sans-serif;
+             background-image: url("{% static 'assets/img/hero-bg.jpg' %}");
+         }
+   </style>
+ </head>
+ 
+ <body class="bg-gray-50">
+  <section class="py-12" id="vote">
+   <div class="container mx-auto px-4">
+    <h2 class="text-black text-4xl font-bold mb-8 text-center" data-aos="fade-up">
+     <strong>
+      Election Results
+     </strong>
+    </h2>
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-1 rounded-lg shadow-lg" data-aos="fade-up">
+     <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-gray-700 text-2xl font-semibold mb-4 text-center">
+            {{ result.0.department }} Election Results
+          </h2>
+      <div class="overflow-x-auto">
+       <table class="min-w-full bg-white">
+        <thead>
+         <tr>
+          <th class="py-1 px-2 bg-gray-200 text-left text-gray-600 font-semibold uppercase tracking-wider">
+           Image
+          </th>
+          <th class="py-1 px-2 bg-gray-200 text-left text-gray-600 font-semibold uppercase tracking-wider">
+           Name
+          </th>
+          <th class="py-1 px-2 bg-gray-200 text-left text-gray-600 font-semibold uppercase tracking-wider">
+           Votes
+          </th>
+         </tr>
+        </thead>
+        <tbody>
+            {% for candidate in result %}
+            <tr class="border-b hover:bg-gray-100 transition duration-300">
+                <td class="py-1 px-2">
+                    <img src="{{ candidate.img.url | default:'/static/default-image.jpg' }}" alt="Image of {{ candidate.name }}" class="w-12 h-12 rounded-full">
+                </td>
+                <td class="py-1 px-2">
+                    {{ candidate.name }}
+                </td>
+                <td class="py-1 px-2">
+                    {{ candidate.vote_count }} Votes
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+ </body>
+</html>

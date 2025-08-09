@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="{% static 'assets/css/styles1.css' %}">
+
+    <title>E-Voteing</title>
+    <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <!--=============== LOGIN ===============-->
+    <div class="login container grid" id="loginAccessRegister">
+        <!--===== LOGIN ACCESS =====-->
+        <div class="login__access">
+            <h1 class="login__title">Create new Blog.</h1>
+
+            <div class="login__area">
+                <form action="" method="post" class="login__form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="login__content grid">
+                        <div class="login__box">
+                            <input type="text" id="tit" name="tit" required placeholder=" " class="login__input">
+                            <label for="tit" class="login__label">title</label>
+                        </div>
+                        <div class="login__box">
+                            <input type="file" id="imgu" name="imgu" class="login__input">
+                            <label for="imgu" class="login__label">Upload Image</label>
+                        </div>
+                        <div class="login__box">
+                            <textarea id="con" name="con" required class="login__input"></textarea>
+                            <label for="con" class="login__label">contend</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="login__button">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="footer dark-background">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="sitename">Vote</h3>
+                <p>Vote Smart, Vote Online – Your Campus, Your Voice!</p>
+            </div>
+            <div class="social-links d-flex justify-content-center">
+                <a href="#" class="social-link">
+                    <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-skype"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+            </div>
+            <div class="copyright-info">
+                <div class="copyright">
+                    <span>Copyright</span> <strong class="px-1 sitename">Vote</strong> <span>All Rights Reserved</span>
+                </div>
+                <div class="credits">
+                    Designed by <a href="http://zaki.zya.me/">Zaki</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+</body>
+</html>

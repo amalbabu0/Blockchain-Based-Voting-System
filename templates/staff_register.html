@@ -1,0 +1,181 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="{% static 'assets/css/styles1.css' %}">
+
+    <title>E-Voteing</title>
+    <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <!--=============== LOGIN ===============-->
+    <div class="login container grid" id="loginAccessRegister">
+        <!--===== LOGIN ACCESS =====-->
+        <div class="login__access">
+            <h1 class="login__title">Create new account.</h1>
+
+            <div class="login__area">
+                <form action="{% url 'staff_register' %}" method="post" class="login__form">
+                    {% csrf_token %}
+
+                    <div class="login__content grid">
+                        <div class="login__group grid">
+                            <div class="login__box">
+                                <input type="text" id="txtname" name="txtname" required placeholder=" " class="login__input">
+                                <label for="txtname" class="login__label">Names</label>
+
+                                <i class="ri-id-card-fill login__icon"></i>
+                            </div>
+
+                            <div class="login__box">
+                                <input type="text" id="txtidno" name="txtidno" required placeholder=" " class="login__input">
+                                <label for="txtidno" class="login__label">ID Number</label>
+
+                                <i class="ri-id-card-fill login__icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="login__box">
+                            <input type="tel" id="txtmobno" name="txtmobno" required placeholder=" " class="login__input">
+                            <label for="txtmobno" class="login__label">Mobile Number</label>
+                        
+                            <i class="ri-phone-fill login__icon"></i>
+                        </div>
+
+                        <div class="login__box">
+                            <input type="email" id="txtemail" name="txtemail" required placeholder=" " class="login__input">
+                            <label for="txtemail" class="login__label">Email</label>
+
+                            <i class="ri-mail-fill login__icon"></i>
+                        </div>
+
+                        <div class="login__group grid">
+                            <div class="login__box">
+                            <select id="txtdepartment" name="txtdepartment" required class="login__input">
+                                <option value=""></option>
+                                <!-- Add options here -->
+                                <option value="BCA">BCA</option>
+                                <option value="BCOM">BCOM</option>
+                                <option value="BBA">BBA</option>
+                                <option value="MSW">MSW</option>
+                                <option value="MBA">MBA</option>
+                                <option value="MCA">MCA</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                            <label for="txtdepartment" class="login__label">Select Department</label>
+                            </div>
+
+                            <div class="login__box">
+                                <select id="txtdesignation" name="txtdesignation" required class="login__input">
+                                <option value=""></option>
+                                <!-- Add options here -->
+                                <option value="Dean">Dean</option>
+                                <option value="HOD">HOD</option>
+                                <option value="prof.">Prof.</option>
+                                <option value="Asst.prof.">Asst.prof.</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                            <label for="txtdesignation" class="login__label">Select Designation</label>
+                            </div>
+                        </div>
+
+                        <div class="login__box">
+                            <input type="password" id="txtpassword" name="txtpassword" required placeholder=" " class="login__input">
+                            <label for="txtpassword" class="login__label">Password</label>
+
+                            <i class="ri-eye-off-fill login__icon login__password" id="loginPasswordCreate"></i>
+                        </div>
+
+                        <div class="login__box">
+                            <input type="password" id="passwordCreateConfirm" name="password2" required placeholder=" " class="login__input">
+                            <label for="passwordCreateConfirm" class="login__label">Confirm Password</label>
+
+                            <i class="ri-eye-off-fill login__icon login__password" id="loginPasswordCreateConfirm"></i>
+                        </div>
+                    </div>
+
+                    <!-- <a href="" class="login__forgot">Forgot your password?</a> -->
+
+                    <button type="submit" class="login__button">Sign-Up</button>
+                </form>
+
+                <div class="login__social">
+                    <p class="login__social-title">Or sign-in with</p>
+
+                    <div class="login__social-links">
+                        <a href="https://accounts.google.com/v3/signin/identifier?continue=https://www.google.com/?ptid=19027681&ptt=8&fpts=0&ec=futura_hpp_co_si_001_p&ifkv=ASSHykqwqNZyMEkJlqWsvvU8L8bmAeF0F29KfhBk2_YO5OeIc52fz4ldssB1AOnbMeYq7VDufeI76A&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-500299378:1739042464879564&ddm=1" class="login__social-link">
+                            <img src="{% static 'assets/img/icon-google.svg' %}" alt="image" class="login__social-img">
+                        </a>
+
+                        <a href="https://www.facebook.com/" class="login__social-link">
+                            <img src="{% static 'assets/img/icon-facebook.svg' %}" alt="image" class="login__social-img">
+                        </a>
+
+                        <a href="https://account.apple.com/sign-in" class="login__social-link">
+                            <img src="{% static 'assets/img/icon-apple.svg' %}" alt="image" class="login__social-img">
+                        </a>
+                    </div>
+                </div>
+
+                <p class="login__switch">
+                    Already have an account? 
+                    <a href="{% url 'login' %}">
+                        <button id="loginButtonRegister" class="glow" style="color: black;">Login</button>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- <footer id="footer" class="footer dark-background">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="sitename">Vote</h3>
+                <p>Vote Smart, Vote Online – Your Campus, Your Voice!</p>
+            </div>
+            <div class="social-links d-flex justify-content-center">
+                <a href="#" class="social-link">
+                    <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-skype"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+            </div>
+            <div class="copyright-info">
+                <div class="copyright">
+                    <span>Copyright</span> <strong class="px-1 sitename">Vote</strong> <span>All Rights Reserved</span>
+                </div>
+                <div class="credits">
+                    Designed by <a href="http://zaki.zya.me/">Zaki</a>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+    <!--=============== MAIN JS ===============-->
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+</body>
+</html>

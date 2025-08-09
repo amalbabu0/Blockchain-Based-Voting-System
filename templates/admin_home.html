@@ -1,0 +1,253 @@
+{% load static %}
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>E-voting</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="theme-color" content="#06c1bd">
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"> 
+
+  <script>
+    function startCountdown(seconds) {
+        const countdownEl = document.getElementById("countdown");
+        const interval = setInterval(() => {
+            if (seconds <= 0) {
+                countdownEl.innerHTML = "Voting has ended.";
+                document.querySelectorAll(".vote-button").forEach(btn => btn.disabled = true);
+                clearInterval(interval);
+                return;
+            }
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            countdownEl.innerHTML = `Time left: ${mins}m ${secs}s`;
+            seconds--;
+        }, 1000);
+    }
+</script>
+
+</head>
+<body class="index-page">
+
+  <header class="header d-flex align-items-center fixed-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="#hero" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img data-aos="fade-up" data-aos-delay="300" src="{% static 'assets/img/logo.png' %}" alt="">
+        <h1 data-aos="fade-up" data-aos-delay="300" class="sitename glow" style="color: #000;">Admin</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu" data-aos="fade-up" data-aos-delay="300">
+        <ul>
+          <li><a href="#hero" class="glow" style="color: #000"><strong>HOME</strong></a></li>
+          <li class="dropdown"><a href="#" class="glow" style="color: #000"><span><strong>RESULT</strong></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+          <li><a href="{% url 'result' %}"  class="glow" style="color: #000">Class election</a></li>
+          <li><a href="{% url 'result_view' %}"  class="glow" style="color: #000">Campus election</a></li>
+            </ul>
+          <li class="dropdown"><a href="#" class="glow" style="color: #000"><span><strong>MANAGE</strong></span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+          <li><a href="{% url 'manage_student' %}"  class="glow" style="color: #000">STUDENTS</a></li>
+          <li><a href="{% url 'manage_staff' %}"  class="glow" style="color: #000">STAFF</a></li>
+            </ul>
+          <li><a href="#feedback"  class="glow" style="color: #000;"><strong>FEEDBACK</strong></a></li>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div data-aos="fade-up" data-aos-delay="300">
+        <a href="{% url 'login' %}" class="btn custom-vote-btn">LogOut</a>
+      </div>
+    </div>
+  </header>
+
+  
+  <section id="hero" class="hero section dark-background">
+    <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+    <div class="container d-flex flex-column align-items-center text-center">
+      <h2 data-aos="fade-up" data-aos-delay="100">Welcome to E-Voting</h2>
+      <p data-aos="fade-up" data-aos-delay="200">Vote Smart, Vote Online - Your Campus, Your Voice!</p>
+      <div data-aos="fade-up" data-aos-delay="300">
+        <div class="text-center"><div class="mt-8">
+          <button id="popupButton" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 transition duration-300">START VOTE</button>
+      </div>
+      <div id="boxes" class="flex justify-center space-x-4 mt-4">
+        <form action="{% url 'start_vote' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="type" value="class">
+          <button id="leftBox" class="hidden mx-2 px-4 py-2 w-32 bg-red-600 text-white font-bold rounded shadow-lg transition duration-300" type="submit">
+              CLASS ELECTION
+          </button>
+      </form>
+      
+      <form action="{% url 'update_top_candidates' %}" method="post">
+          {% csrf_token %}
+          <button id="rightBox" class="hidden mx-2 px-4 py-2 w-32 bg-blue-600 text-white font-bold rounded shadow-lg transition duration-300" type="submit">
+              CAMPUS ELECTION
+          </button>
+      </form>
+      
+      <form action="{% url 'newvote' %}" method="post">
+          {% csrf_token %}
+          <button id="newvote" class="hidden mx-2 px-4 py-2 w-32 bg-green-600 text-white font-bold rounded shadow-lg transition duration-300" type="submit">
+              START NEW VOTE
+          </button>
+      </form>
+   </div>
+  </div>
+  <div class="fixed bottom-4 left-4 bg-white p-4 rounded shadow-lg hidden" id="timer">
+   <p class="text-lg font-bold" id="timerText" style="color:#000">
+    Time Left:
+    <span id="time">
+     00:00
+    </span>
+   </p>
+  </div>
+  </section>
+  <script>
+  document.getElementById('popupButton').addEventListener('click', function() {
+           document.getElementById('leftBox').classList.toggle('hidden');
+           document.getElementById('rightBox').classList.toggle('hidden');
+           document.getElementById('newvote').classList.toggle('hidden');
+       });
+  
+      
+  </script>
+
+
+
+<section class="bg-white" id="feedback">
+  <div class="container mx-auto p-4">
+   <h1 class="text-4xl font-bold text-center text-black mb-8">
+    User Feedback
+   </h1>
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    {% for x in feed_out %}
+    <div class="bg-gradient-to-r from-blue-400 to-gray-200 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+     <div class="flex items-center mb-4">
+      <img alt="Profile picture of user 1" class="w-12 h-12 rounded-full mr-4" src="{% static 'assets/img/photo.png' %}"/>
+      <div>
+       <h2 class="text-xl font-semibold text-white">
+         {{ x.name }}
+       </h2>
+       <p class="text-white">
+        {{ x.email }}
+       </p>
+      </div>
+     </div>
+     <p class="text-white">
+       {{ x.feedback }}
+     </p>
+     <div class="text-center">
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="window.location.href='mailto:{{ x.email }}?body={{ x.feedback }}%20Thanking%20you%20for%20the%20feedback'">reply</button>
+     </div>
+    </div>
+{% endfor %}
+    
+    {% for x in feed_staff %}
+    <div class="bg-gradient-to-r from-blue-400 to-gray-200 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+     <div class="flex items-center mb-4">
+      <img alt="Profile picture of user 2" class="w-12 h-12 rounded-full mr-4" src="{% static 'assets/img/photo.png' %}"/>
+      <div>
+       <h2 class="text-xl font-semibold text-white">
+         {{ x.staff.name }}
+       </h2>
+       <p class="text-white">
+        {{ x.staff.email }}
+       </p>
+      </div>
+     </div>
+     <p class="text-white">
+       {{ x.feedback }}
+     </p>
+     <div class="text-center">
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="window.location.href='mailto:{{ x.staff.email }}?body={{ x.feedback }}%20Thanking%20you%20for%20the%20feedback'">reply</button>
+     </div>
+    </div>
+    {% endfor %}
+    {% for x in feed_student %}
+    <div class="bg-gradient-to-r from-blue-400 to-gray-200 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+     <div class="flex items-center mb-4">
+      <img alt="Profile picture of user 3" class="w-12 h-12 rounded-full mr-4" src="{{ x.student.img.url | default:'/static/default-image.jpg' }}" alt="Image of {{ x.student.name }}"/>
+      <div>
+       <h2 class="text-xl font-semibold text-white">
+         {{ x.student.name }}
+       </h2>
+       <p class="text-white">
+        {{ x.student.email }}
+       </p>
+      </div>
+     </div>
+     <p class="text-white">
+       {{ x.feedback }}
+     </p>
+     <div class="text-center">
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="window.location.href='mailto:{{ x.student.email }}?body={{ x.feedback }}%20Thanking%20you%20for%20the%20feedback'">reply</button>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+ </section>
+
+
+<footer data-aos="fade-up" data-aos-delay="300" id="footer" class="footer dark-background">
+  <div class="container">
+    <h3 class="sitename">Vote</h3>
+    <p>Vote Smart, Vote Online – Your Campus, Your Voice!</p>
+    </div> 
+    <div class="container">
+      <div class="copyright">
+        <span>Copyright</span> <strong class="px-1 sitename">Vote</strong> <span>All Rights Reserved</span>
+      </div>
+      <div class="credits">
+        Designed by <a href="http://zaki.zya.me/">Zaki</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script type="text/javascript" src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+<script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html> 
