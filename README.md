@@ -47,11 +47,11 @@ Install Django:
 Database Migrations
 -------------------
 
-5. Make Migrations:
+Make Migrations:
 
     python manage.py makemigrations
 
-6. Migrate Database:
+Migrate Database:
 
     python manage.py migrate
 
