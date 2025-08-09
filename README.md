@@ -14,8 +14,32 @@ Requirements
 Setup Instructions
 ------------------
 
-*UNZIP THE FILE
+For Windows:
 
+   Open Command Prompt.
+   Navigate to your project directory.
+   Create a virtual environment:
+   
+         python -m venv venv
+         
+   Activate the virtual environment:
+
+      venv\Scripts\activate
+
+For Linux:
+
+   Open Terminal.
+   Navigate to your project directory.
+   Create a virtual environment:
+      
+      python3 -m venv venv
+
+   
+   Activate the virtual environment:
+
+      source venv/bin/activate
+      
+   
 Install Django:
    
         pip install Django    
