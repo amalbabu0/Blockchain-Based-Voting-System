@@ -20,7 +20,7 @@ For Windows:
    Navigate to your project directory.
    Create a virtual environment:
    
-         python -m venv venv
+      python -m venv venv
          
    Activate the virtual environment:
 
