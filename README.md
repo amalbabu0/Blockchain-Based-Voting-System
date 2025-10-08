@@ -42,7 +42,11 @@ For Linux:
    
 Install Django:
    
-        pip install Django    
+        pip install Django
+
+Install Requirement:
+   
+        pip install requirement.txt 
 
 Database Migrations
 -------------------
