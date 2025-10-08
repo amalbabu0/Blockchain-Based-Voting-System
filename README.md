@@ -39,7 +39,11 @@ For Linux:
 
       source venv/bin/activate
       
-   
+
+Django & Requirement
+-------------------
+
+
 Install Django:
    
         pip install Django
