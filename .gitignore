@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+db.sqlite3
+db.sqlite3.bak
+vote.zip
+assets/

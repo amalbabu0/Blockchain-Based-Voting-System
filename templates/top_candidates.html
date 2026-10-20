@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Candidates</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Top Candidates by Department</h1>
+        
+        {% if top_candidates %}
+            <div class="accordion" id="candidatesAccordion">
+                {% regroup top_candidates by department as grouped_candidates %}
+                {% for group in grouped_candidates %}
+                    <div class="card">
+                        <div class="card-header" id="heading{{ forloop.counter }}">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                    {{ group.grouper }}
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#candidatesAccordion">
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    {% for candidate in group.list %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{ candidate.name }} 
+                                            <span class="badge badge-primary badge-pill">{{ candidate.vote_count|default:0 }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">No candidates found.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

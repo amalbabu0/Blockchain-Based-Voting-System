@@ -1,0 +1,99 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>E-voting</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <style>
+            html, body {
+                height: 100%;
+            }
+            body {
+                display: flex;
+                flex-direction: column;
+                background-image: url("{% static 'assets/img/hero-bg.jpg' %}");
+            }
+            .content {
+                flex: 1;
+            }
+
+            .group:hover img {
+                transform: scale(1.05);
+            }
+        </style>
+         <script>
+            function startCountdown(seconds) {
+                const countdownEl = document.getElementById("countdown");
+                const interval = setInterval(() => {
+                    if (seconds <= 0) {
+                        countdownEl.innerHTML = "Voting has ended.";
+                        document.querySelectorAll(".vote-button").forEach(btn => btn.disabled = true);
+                        clearInterval(interval);
+                        return;
+                    }
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    countdownEl.innerHTML = `Time left: ${mins}m ${secs}s`;
+                    seconds--;
+                }, 1000);
+            }
+        </script>
+    </head>
+    <body class="bg-white text-gray-900">
+        <div class="content container mx-auto px-4 py-8">
+            <h1 class="text-4xl font-bold mb-4">Candidates</h1>
+            {% if voting_active %}
+            <div class="text-green-600 font-bold mb-4" id="countdown">Loading timer...</div>
+            <script>
+              startCountdown(Number("{{ time_remaining|default:0 }}"));
+            </script>
+        {% else %}
+            <div class="text-red-600 font-bold mb-4">Voting is currently closed.</div>
+        {% endif %}
+            <div class="border-b-4 border-blue-500 w-16 mb-8"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {% for candidate in candidates %}
+                <div class="relative group">
+                    <img alt="Portrait of {{ candidate.name }}" class="w-full h-64 object-cover" src="{{ candidate.img.url | default:'/static/default-image.jpg' }}"/>
+                    <div class="absolute bottom-0 left-0 right-0 bg-white bg-opacity-75 p-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div>
+                            <p class="font-bold">{{ candidate.name }}</p>
+                            <p class="text-gray-600">{{ candidate.department }}</p>
+                        </div>
+                        
+                        <!-- Form to Vote for the Candidate -->
+                        <form method="get" action="{% url 'vote' candidate.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="type" value="class">
+                            {% if voting_active %}
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" onclick="startCountdown()">VOTE</button>
+                            {% else %}
+                            <p>voteing has been ended</p>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-gray-600">No candidates available.</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <footer class="bg-black text-white py-8">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-2">Vote</h2>
+                <p>Vote Smart, Vote Online – Your Campus, Your Voice!</p>
+            </div>
+            <div class="container mx-auto text-center mt-4">
+                <div class="copyright">
+                    <span>Copyright</span> <strong class="px-1 sitename">Vote</strong> <span>All Rights Reserved</span>
+                </div>
+                <div class="credits">
+                    Designed by <a href="http://zaki.zya.me/" class="text-blue-500">Zaki</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

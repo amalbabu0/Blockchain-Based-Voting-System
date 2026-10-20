@@ -1,0 +1,141 @@
+{% load static %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   E-voting
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   html,
+      body {
+        height: 100%;
+        font-family: "Inter", sans-serif;
+        background-image: url('{% static "assets/img/hero-bg.jpg" %}');
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        background-color: #f9fafb;
+      }
+      .content {
+        flex: 1;
+      }
+      .group:hover img {
+        transform: scale(1.05);
+      }
+      /* Hide native radio buttons */
+      input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      /* Custom radio button style */
+      .custom-radio {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border: 2px solid #3b82f6; /* blue-500 */
+        border-radius: 9999px;
+        position: relative;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+        transition: background-color 0.3s ease;
+      }
+      /* Inner dot */
+      input[type="radio"]:checked + .custom-radio::after {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 12px;
+        height: 12px;
+        background-color: #3b82f6; /* blue-500 */
+        border-radius: 9999px;
+      }
+      label.flex {
+        cursor: pointer;
+      }
+      /* Add the following CSS rule to display candidates in a single row */
+.flex-wrap {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Update the grid-cols class to display candidates in a single row */
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+  </style>
+ </head>
+ <body class="bg-white text-gray-900 min-h-screen flex flex-col">
+  <div class="content container mx-auto px-4 py-8">
+   <h1 class="text-4xl font-extrabold mb-4 text-center text-black-700">
+    Campus Election
+   </h1>
+   <div class="border-b-4 border-blue-500 w-20 mx-auto mb-8">
+   </div>
+   <form class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend class="text-lg font-semibold mb-4">
+            Select Candidate:
+        </legend>
+        <div class="flex flex-wrap justify-center">
+            {% for candidate in candidates %}
+            <label class="group flex flex-col items-center border border-gray-300 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer mx-4" for="candidate-{{ candidate.candidate.id }}">
+                <img alt="{{ candidate.candidate.name }}" class="w-full h-48 object-cover rounded-md mb-4 transition-transform duration-300" height="300" src="{{ candidate.candidate.img.url | default:'/static/default-image.jpg' }}" width="400"/>
+                <div class="flex items-center w-full">
+                    <input id="candidate-{{ candidate.candidate.id }}" name="candidate" required="" type="radio" value="{{ candidate.candidate.id }}"/>
+                    <span class="custom-radio">
+                    </span>
+                    <span class="text-lg font-medium text-gray-900">
+                        {{ candidate.candidate.name }}
+                        {{ candidate.candidate.department }}
+                    </span>
+                </div>
+            </label>
+            {% endfor %}
+        </div>
+    </fieldset>
+    <button class="mt-8 w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 rounded-md transition-colors duration-300" type="submit">
+     VOTE
+    </button>
+   </form>
+  </div>
+  <footer class="bg-black text-white py-8 mt-auto">
+   <div class="container mx-auto text-center px-4">
+    <h2 class="text-3xl font-bold mb-2">
+     Vote
+    </h2>
+    <p class="text-gray-300">
+     Vote Smart, Vote Online – Your Campus, Your Voice!
+    </p>
+    <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4 text-gray-400 text-sm">
+     <div>
+      <span>
+       Copyright
+      </span>
+      <strong class="px-1 sitename">
+       Vote
+      </strong>
+      <span>
+       All Rights Reserved
+      </span>
+     </div>
+     <div>
+      Designed by
+      <a class="text-blue-500 hover:underline" href="http://zaki.zya.me/" rel="noopener noreferrer" target="_blank">
+       Zaki
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+ </body>
+</html>

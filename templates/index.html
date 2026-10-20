@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>E-voting</title>
+  <meta name="theme-color" content="#06c1bd">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/logo.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body class="index-page">
+
+  <!-- Header -->
+  <header class="header d-flex align-items-center fixed-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="#hero" class="logo d-flex align-items-center me-auto me-xl-0">
+        <img data-aos="fade-up" data-aos-delay="300" src="{% static 'assets/img/logo.png' %}" alt="">
+        <h1 data-aos="fade-up" data-aos-delay="300" class="sitename glow" style="color: #000;">Vote</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu" data-aos="fade-up" data-aos-delay="300">
+        <ul>
+          <li><a href="#hero" class="active glow" style="color: #000"><strong>HOME</strong></a></li>
+          <li><a href="#about" class="glow" style="color: #000"><strong>ABOUT</strong></a></li>
+          <li class="dropdown">
+            <a href="#" class="glow" style="color: #000"><strong>REGISTRATION</strong> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{% url 'staff_register' %}" style="color: black;">STAFF</a></li>
+              <li><a href="{% url 'student_register' %}" style="color: black;">STUDENT</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact" class="glow" style="color: #000"><strong>FEEDBACK</strong></a></li>
+        </ul>
+      </nav>
+
+      <div data-aos="fade-up" data-aos-delay="300">
+        <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+      <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+      <div class="container d-flex flex-column align-items-center text-center">
+        <h2 data-aos="fade-up" data-aos-delay="100">Welcome to E-Voting</h2>
+        <p data-aos="fade-up" data-aos-delay="200">Vote Smart, Vote Online - Your Campus, Your Voice!</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <p>E-voting systems in colleges offer a modern approach to conducting elections. These systems:</p>
+        <ul>
+          <li>Enhance voter turnout.</li>
+          <li>Streamline ballot casting.</li>
+          <li>Ensure fast and accurate result counting.</li>
+          <li>Reduce the potential for electoral fraud.</li>
+          <li>Improve security with encryption and secure logins.</li>
+          <li>Maintain voter confidentiality.</li>
+          <li>Encourage greater participation in student governance.</li>
+          <li>Allow voting from any internet-connected device.</li>
+          <li>Eliminate barriers like long queues and limited polling hours.</li>
+          <li>Help students with disabilities or those off-campus to vote.</li>
+        </ul>
+        <a href="{% url 'right' %}" class="read-more"><span>Right To Vote</span> <i class="bi bi-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="contact" class="contact section light-background" data-aos="fade-up" data-aos-delay="300">
+      <div class="container section-title">
+        <h2>Feedback</h2>
+      </div>
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Call Us</h3>
+                <p><a href="https://wa.me/9072939015?text=The%20site%20is%20not%20working%20properly">+91 xxxxxxxxxx</a></p>
+              </div>
+            </div>
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p><a href="mailto:amalbabu2803@gmail.com">info@example.com</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="row gy-4">
+                <div class="col-md-6">
+                  <label for="tname" class="fw-bold">Name:</label>
+                  <input type="text" name="tname" class="form-control" id="tname" required placeholder="Enter your name">
+                </div>
+                <div class="col-md-6">
+                  <label for="temail" class="fw-bold">Email:</label>
+                  <input type="email" name="temail" class="form-control" id="temail" required placeholder="Enter your email">
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="tfeed" class="fw-bold">Message:</label>
+                <textarea class="form-control" name="tfeed" id="tfeed" rows="5" required placeholder="Enter your message"></textarea>
+              </div>
+              <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <h3 class="sitename">Vote</h3>
+        <p>Vote Smart, Vote Online – Your Campus, Your Voice!</p>
+        <div class="copyright">
+          &copy; <strong class="px-1 sitename">Vote</strong> All Rights Reserved
+        </div>
+        <div class="credits">
+          Designed by <a href="http://zaki.zya.me/">Zaki</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center hidden"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Chatbot -->
+    <button class="fixed bottom-6 left-6 bg-blue-500 hover:bg-teal-600 text-white w-14 h-14 rounded-full shadow-xl flex items-center justify-center z-50" id="chatbot-btn" title="Chat with us">
+      <i class="fas fa-robot fa-lg"></i>
+    </button>
+
+    <div id="popup-box" class="fixed bottom-20 left-6 bg-white rounded-lg shadow-lg p-4 w-80 max-w-full hidden z-50">
+
+      <h2 class="text-lg font-bold mb-2">Chat with VoteBot</h2>
+      
+      <!-- Frequent Questions Panel -->
+      <div class="mb-2">
+        <h3 class="text-sm font-semibold mb-1">Popular Questions:</h3>
+        <div class="flex flex-wrap gap-2 text-sm">
+          <button class="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded faq-question">How do I register?</button>
+          <button class="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded faq-question">How do I vote?</button>
+          <button class="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded faq-question">Can I change my vote?</button>
+          <button class="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded faq-question">Is my vote confidential?</button>
+          <button class="bg-gray-200 hover:bg-gray-300 px-2 py-1 rounded faq-question">Who can participate?</button>
+        </div>
+      </div>
+    
+      <div id="chat-box" class="border rounded w-full h-48 overflow-y-auto p-2 mb-2 text-sm bg-gray-100 text-black"></div>
+      <input type="text" id="user-message" class="w-full border rounded p-2 text-sm mb-2" placeholder="Type a message...">
+      <button id="send-btn" class="bg-blue-500 hover:bg-teal-600 text-white rounded-lg p-2 text-sm w-full">Send</button>
+    </div>
+    
+
+  </main>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <!-- Custom Chatbot Script -->
+  <script>
+    const chatbotBtn = document.getElementById('chatbot-btn');
+    const popupBox = document.getElementById('popup-box');
+
+    chatbotBtn.addEventListener('click', () => {
+      popupBox.classList.toggle('hidden');
+    });
+
+    const scrollTopBtn = document.getElementById("scroll-top");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.remove("hidden");
+      } else {
+        scrollTopBtn.classList.add("hidden");
+      }
+    });
+
+    scrollTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    function getCSRFToken() {
+      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+
+    function sendMessage() {
+      const message = $('#user-message').val().trim();
+      if (!message) return;
+
+      $('#chat-box').append('<div><b>You:</b> ' + message + '</div>');
+
+      $.ajax({
+        url: '/chat/',
+        type: 'POST',
+        contentType: 'application/json',
+        headers: {
+          'X-CSRFToken': getCSRFToken()
+        },
+        data: JSON.stringify({ message: message }),
+        success: function(response) {
+          $('#chat-box').append('<div><b>Bot:</b> ' + response.reply + '</div>');
+          $('#user-message').val('');
+          $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+        },
+        error: function() {
+          $('#chat-box').append('<div><b>Bot:</b> Sorry, something went wrong.</div>');
+        }
+      });
+    }
+
+    $('#send-btn').on('click', sendMessage);
+    $('#user-message').on('keypress', function(e) {
+      if (e.which === 13) {
+        sendMessage();
+      }
+    });
+    // Suggested Questions Click Handler
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    document.getElementById('user-message').value = button.textContent;
+    sendMessage();
+  });
+});
+
+  </script>
+</body>
+</html>
