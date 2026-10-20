@@ -5,3 +5,6 @@ db.sqlite3
 db.sqlite3.bak
 vote.zip
 assets/
+
+.vercel
+.env*
