@@ -3,9 +3,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
+    path('favicon.ico', RedirectView.as_view(url='/static/assets/img/favicon.png', permanent=True)),
     path('student_register/', views.student_registration, name='student_register'),
     path('student_home/', views.student_home, name='student_home'),
     path('student_details_view/', views.student_details_view, name='student_details_view'),
