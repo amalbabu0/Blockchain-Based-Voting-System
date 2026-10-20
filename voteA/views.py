@@ -304,10 +304,6 @@ def view_blog(request):
 
 
 def result(request):
-    return render(request,'result.html')
-
-
-def result(request):
     candidatesBCA = Student.objects.filter(type='CANDIDATE', department='BCA').annotate(vote_count=Count('votes_received')).order_by('-vote_count')
     candidatesBCOM = Student.objects.filter(type='CANDIDATE', department='BCOM').annotate(vote_count=Count('votes_received')).order_by('-vote_count')
     candidatesBBA = Student.objects.filter(type='CANDIDATE', department='BBA').annotate(vote_count=Count('votes_received')).order_by('-vote_count')
@@ -332,6 +328,12 @@ def result1(request):
     result = Student.objects.filter(type='CANDIDATE', department=department).annotate(vote_count=Count('votes_received')).order_by('-vote_count')
     return render(request, 'result1.html', {'result': result})
     
+
+def feed_view(request):
+    # Staff/student feedback is already shown on the admin dashboard;
+    # this standalone page was never built (and isn't linked anywhere).
+    return redirect('admin_home')
+
 
 def admin_home(request):
     feed_out = Out_Feed.objects.all()
@@ -463,16 +465,20 @@ def manage_student(request):
 
 def manage_studentStaff(request):
     staff_id = request.session.get('staff_id')
-    std = Staff.objects.get(id=staff_id)
-    dep = Student.objects.filter(department=std.department)
+    if not staff_id:
+        messages.error(request, 'You must be logged in as staff to access this page.')
+        return redirect('login')
+    std = get_object_or_404(Staff, id=staff_id)
     studentStaff = Student.objects.filter(department=std.department)
     return render(request, 'manage_studentStaff.html', {'studentStaff': studentStaff, 'staff_id': staff_id})
 
 
 def view_students(request):
     staff_id = request.session.get('staff_id')
-    std = Staff.objects.get(id=staff_id)
-    dep = Student.objects.filter(department=std.department)
+    if not staff_id:
+        messages.error(request, 'You must be logged in as staff to access this page.')
+        return redirect('login')
+    std = get_object_or_404(Staff, id=staff_id)
     students = Student.objects.filter(department=std.department)
     return render(request, 'view_students.html', {'students': students})
 
@@ -570,17 +576,21 @@ def student_details_view(request):
 
 def manage_candidate(request):
     staff_id = request.session.get('staff_id')
-    std = Staff.objects.get(id=staff_id)
-    dep = Student.objects.filter(department=std.department)
+    if not staff_id:
+        messages.error(request, 'You must be logged in as staff to access this page.')
+        return redirect('login')
+    std = get_object_or_404(Staff, id=staff_id)
     candidate = Student.objects.filter(type='CANDIDATE', department=std.department)
     return render(request, 'manage_candidate.html', {'candidate': candidate})
 
 
 def view_candidates(request):
     staff_id = request.session.get('staff_id')
-    std = Staff.objects.get(id=staff_id)
-    dep = Student.objects.filter(department=std.department)
-    candidate = Student.objects.filter(type='CANDIDATE',department=std.department)
+    if not staff_id:
+        messages.error(request, 'You must be logged in as staff to access this page.')
+        return redirect('login')
+    std = get_object_or_404(Staff, id=staff_id)
+    candidate = Student.objects.filter(type='CANDIDATE', department=std.department)
     return render(request, 'view_candidates.html', {'candidate': candidate})
 
 

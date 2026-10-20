@@ -36,7 +36,7 @@ urlpatterns = [
     path('election2/', views.election2, name='election2'),
     path('admin/', admin.site.urls),
     path('admin_home/', views.admin_home, name='admin_home'),
-    path('Feed/', views.Feed, name='Feed'),
+    path('Feed/', views.feed_view, name='Feed'),
     path('get_student_details/', views.get_student_details, name='get_student_details'),
     path('', views.index, name='index'),
     path('right/', views.right, name='right'),
