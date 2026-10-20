@@ -113,20 +113,12 @@ def newvote(request):
     Vote.objects.all().delete()
     VoterRecord.objects.all().delete()
     TopCandidate.objects.all().delete()
-    import json
 
-    # Load the blockchain data from the file
-    with open('blockchain.json', 'r') as f:
-        blockchain = json.load(f)
-
-    # Remove the votes from each block
-    for block in blockchain:
+    blockchain = Blockchain()
+    for block in blockchain.chain:
         block['votes'] = []
+    blockchain.save_chain()
 
-    # Save the updated blockchain data to the file
-    with open('blockchain.json', 'w') as f:
-        json.dump(blockchain, f, indent=4)
-        
     return redirect('admin_home')
 
 
