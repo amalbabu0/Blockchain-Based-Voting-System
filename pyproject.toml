@@ -1,2 +1,14 @@
+[project]
+name = "vote"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Django==4.2.18",
+    "psycopg2-binary==2.9.13",
+    "dj-database-url==3.1.2",
+    "python-dotenv==1.2.3",
+    "Pillow==11.2.1",
+]
+
 [tool.vercel]
 entrypoint = "voteP.asgi:application"
