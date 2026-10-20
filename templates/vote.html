@@ -1,4 +1,5 @@
 {% load static %}
+{% load vote_extras %}
 <html lang="en">
  <head>
   <meta charset="utf-8"/>
@@ -89,7 +90,7 @@
         <div class="flex flex-wrap justify-center">
             {% for candidate in candidates %}
             <label class="group flex flex-col items-center border border-gray-300 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer mx-4" for="candidate-{{ candidate.candidate.id }}">
-                <img alt="{{ candidate.candidate.name }}" class="w-full h-48 object-cover rounded-md mb-4 transition-transform duration-300" height="300" src="{{ candidate.candidate.img.url | default:'/static/default-image.jpg' }}" width="400"/>
+                <img alt="{{ candidate.candidate.name }}" class="w-full h-48 object-cover rounded-md mb-4 transition-transform duration-300" height="300" src="{{ candidate.candidate.img|img_url }}" width="400"/>
                 <div class="flex items-center w-full">
                     <input id="candidate-{{ candidate.candidate.id }}" name="candidate" required="" type="radio" value="{{ candidate.candidate.id }}"/>
                     <span class="custom-radio">

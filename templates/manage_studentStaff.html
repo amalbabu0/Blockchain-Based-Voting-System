@@ -1,4 +1,5 @@
 {% load static %}
+{% load vote_extras %}
 <html lang="en">
  <head>
     <meta charset="utf-8">
@@ -86,7 +87,7 @@ table td {
           {% for studentStaff in studentStaff %}
           <tr>
             <td class="py-1 px-2 border-b text-xs">
-              <img src="{{ studentStaff.img.url | default:'/static/default-image.jpg' }}" width="50" height="50" class="image-table">
+              <img src="{{ studentStaff.img|img_url }}" width="50" height="50" class="image-table">
             </td>
             <td class="py-1 px-2 border-b text-xs">{{ studentStaff.name }}</td>
             <td class="py-1 px-2 border-b text-xs">{{ studentStaff.ad_no }}</td>

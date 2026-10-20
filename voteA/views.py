@@ -320,11 +320,16 @@ def result(request):
 def result1(request):
     student_id = request.session.get('student_id')
     staff_id = request.session.get('staff_id')
-    std = Student.objects.get(id=student_id)
-    std_staff = Staff.objects.get(id=staff_id)
-    staff_dep =Staff.objects.filter(department=std_staff.department)
-    dep = Student.objects.filter(department=std.department)
-    result = Student.objects.filter(type='CANDIDATE', department=std.department or std_staff.department).annotate(vote_count=Count('votes_received')).order_by('-vote_count')
+
+    if student_id:
+        department = get_object_or_404(Student, id=student_id).department
+    elif staff_id:
+        department = get_object_or_404(Staff, id=staff_id).department
+    else:
+        messages.error(request, 'You must be logged in to view this page.')
+        return redirect('login')
+
+    result = Student.objects.filter(type='CANDIDATE', department=department).annotate(vote_count=Count('votes_received')).order_by('-vote_count')
     return render(request, 'result1.html', {'result': result})
     
 
@@ -472,8 +477,9 @@ def view_students(request):
     return render(request, 'view_students.html', {'students': students})
 
 def student_profile(request):
-    # view logic here
-    return render(request, 'student_profile.html')
+    student_id = request.session.get('student_id')
+    student = Student.objects.filter(id=student_id).first() if student_id else None
+    return render(request, 'student_profile.html', {'student': student})
 
 def accept_student(request, student_id):
     student = Student.objects.get(id = student_id)

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Student Profile</title>
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon" type="image/png">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="{% url 'student_home' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">KnightOne</h1>
+      </a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-title dark-background">
+      <div class="container position-relative">
+        <h1>My Profile</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'student_home' %}">Home</a></li>
+            <li class="current">Profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container" data-aos="fade-up">
+        {% if student %}
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="text-center mb-4">
+              <img src="{{ student.img|img_url }}" alt="{{ student.name }}" class="rounded-circle" width="120" height="120">
+            </div>
+            <table class="table table-bordered">
+              <tbody>
+                <tr><th>Name</th><td>{{ student.name }}</td></tr>
+                <tr><th>Admission No.</th><td>{{ student.ad_no }}</td></tr>
+                <tr><th>Email</th><td>{{ student.email }}</td></tr>
+                <tr><th>Mobile</th><td>{{ student.mob }}</td></tr>
+                <tr><th>Department</th><td>{{ student.department }}</td></tr>
+                <tr><th>Status</th><td>{{ student.status }}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% else %}
+        <p>You must be logged in to view your profile.</p>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

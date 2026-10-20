@@ -1,4 +1,5 @@
 {% load static %}
+{% load vote_extras %}
 <html lang="en">
  <head>
     <meta charset="utf-8">
@@ -188,7 +189,7 @@
     {% for x in feed_student %}
     <div class="bg-gradient-to-r from-blue-400 to-gray-200 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
      <div class="flex items-center mb-4">
-      <img alt="Profile picture of user 3" class="w-12 h-12 rounded-full mr-4" src="{{ x.student.img.url | default:'/static/default-image.jpg' }}" alt="Image of {{ x.student.name }}"/>
+      <img alt="Profile picture of user 3" class="w-12 h-12 rounded-full mr-4" src="{{ x.student.img|img_url }}" alt="Image of {{ x.student.name }}"/>
       <div>
        <h2 class="text-xl font-semibold text-white">
          {{ x.student.name }}
