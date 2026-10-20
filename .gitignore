@@ -4,7 +4,7 @@ __pycache__/
 db.sqlite3
 db.sqlite3.bak
 vote.zip
-assets/
+/assets/
 
 .vercel
 .env*
