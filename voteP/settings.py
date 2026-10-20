@@ -131,6 +131,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 # static-file finders (app dirs + STATICFILES_DIRS) instead of STATIC_ROOT.
 WHITENOISE_USE_FINDERS = True
 
+# Vercel's filesystem is read-only/ephemeral, so uploaded media (student and
+# candidate photos, blog images) can't be stored on local disk there.
+if os.environ.get('BLOB_READ_WRITE_TOKEN'):
+    DEFAULT_FILE_STORAGE = 'voteP.storage.VercelBlobStorage'
+
 
 
 
